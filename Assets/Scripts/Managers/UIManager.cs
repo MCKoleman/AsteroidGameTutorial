@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class UIManager : Singleton<UIManager>
 {
+    // Main UI components
     [SerializeField]
     private GameObject hud;
     [SerializeField]
     private GameObject pauseMenu;
     [SerializeField]
     private GameObject deathMenu;
+
+    // HUD UI components
     [SerializeField]
     private Slider energySlider;
     [SerializeField]
@@ -20,8 +24,18 @@ public class UIManager : Singleton<UIManager>
     private TextMeshProUGUI scoreText;
     [SerializeField]
     private TextMeshProUGUI highscoreText;
+
+    // Death Menu UI components
     [SerializeField]
     private TextMeshProUGUI deathScoreText;
+
+    // EventSystem selection components
+    [SerializeField]
+    private GameObject hudDefaultSelect = null;
+    [SerializeField]
+    private GameObject pauseMenuDefaultSelect;
+    [SerializeField]
+    private GameObject deathMenuDefaultSelect;
 
     // Initializes the singleton. Should only be called from GameManager.
     public void Init()
@@ -35,6 +49,7 @@ public class UIManager : Singleton<UIManager>
         pauseMenu.SetActive(false);
         deathMenu.SetActive(false);
         hud.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(hudDefaultSelect);
     }
 
     // Shows the death menu
@@ -43,6 +58,7 @@ public class UIManager : Singleton<UIManager>
         hud.SetActive(false);
         pauseMenu.SetActive(false);
         deathMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(deathMenuDefaultSelect);
     }
 
     // Shows the pause menu
@@ -51,6 +67,7 @@ public class UIManager : Singleton<UIManager>
         hud.SetActive(false);
         deathMenu.SetActive(false);
         pauseMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(pauseMenuDefaultSelect);
     }
 
     // Toggles the pause state

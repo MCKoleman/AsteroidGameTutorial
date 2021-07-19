@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 37047571212981759}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &37047571212981752
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -135,6 +135,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0caa1c8ddf4714bafcb7c8209f6d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  firePoint: {fileID: 37047571265262836}
+  fireProjectilePrefab: {fileID: 1633709926232847510, guid: 46317b801b16c2043a4a34ae49d8fc0e, type: 3}
+  maxFireCooldown: 0.1
+  curFireCooldown: 0
+  energyRegenMod: 1
+  fireCostDecayMod: 3
+  baseFireEnergyCost: 0.1
+  curFireEnergyCost: 0
+  maxEnergy: 5
+  curEnergy: 0
 --- !u!1 &37047571265262836
 GameObject:
   m_ObjectHideFlags: 0
