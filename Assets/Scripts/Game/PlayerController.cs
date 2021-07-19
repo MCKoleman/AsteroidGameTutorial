@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         {
             HandleMovement();
             HandleFire();
+            HandlePause();
         }
     }
 
@@ -120,24 +121,41 @@ public class PlayerController : MonoBehaviour
         UpdateEnergyDisplay();
     }
 
+    // Handles game pausing
+    private void HandlePause()
+    {
+        // Check if any pause keys are inputted
+        if (Input.GetKeyDown(KeyCode.Escape)
+            || Input.GetKeyDown(KeyCode.P)
+            || Input.GetKeyDown(KeyCode.Joystick1Button7))
+        {
+            UIManager.Instance.TogglePause();
+        }
+    }
+
     // Updates the energy display in the UI
     private void UpdateEnergyDisplay()
     {
-
+        UIManager.Instance.UpdateEnergySlider(curEnergy / maxEnergy);
+        UIManager.Instance.UpdateCooldownSlider(curFireCooldown / maxFireCooldown);
     }
 
     // Kills the player, prompting respawn and resetting UI
     private void KillPlayer()
     {
+        // Disable player components
         this.GetComponent<SpriteRenderer>().enabled = false;
         rb.isKinematic = true;
         rb.velocity = Vector2.zero;
+
+        // End the game
         GameManager.Instance.EndGame();
     }
 
     // Respawns the player
     private void RespawnPlayer()
     {
+        // Enable player components
         this.GetComponent<SpriteRenderer>().enabled = true;
         rb.isKinematic = false;
         rb.velocity = Vector2.zero;

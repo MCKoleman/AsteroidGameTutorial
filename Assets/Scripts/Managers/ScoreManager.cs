@@ -38,6 +38,8 @@ public class ScoreManager : Singleton<ScoreManager>
     // Ends the game
     public void EndGame()
     {
+        UIManager.Instance.SetDeathScore(currentScore, highscore);
+
         // If player reached a new highscore, save it
         if(currentScore > highscore)
         {
@@ -90,7 +92,8 @@ public class ScoreManager : Singleton<ScoreManager>
     // Updates the score display in the UI
     public void UpdateScoreDisplay()
     {
-        // TODO: Update UI
+        UIManager.Instance.UpdateScoreText(currentScore);
+        UIManager.Instance.UpdateHighscoreText(highscore);
     }
 
     // Getters and setters

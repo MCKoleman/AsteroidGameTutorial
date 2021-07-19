@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         IsGameActive = true;
+        Time.timeScale = 1.0f;
     }
 
     // Ends the game
@@ -33,5 +34,8 @@ public class GameManager : Singleton<GameManager>
     {
         ScoreManager.Instance.EndGame();
         IsGameActive = false;
+        Time.timeScale = 0.0f;
+
+        UIManager.Instance.ShowDeathMenu();
     }
 }
