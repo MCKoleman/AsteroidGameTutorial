@@ -60,6 +60,7 @@ public class Asteroid : MonoBehaviour
         if(curHealth <= 0)
         {
             // When the asteroid is destroyed, increment the player's score
+            ScoreManager.Instance.AddScore(maxHealth * SCORE_MOD);
             // TODO: Increase score
             Destroy(this.gameObject);
         }

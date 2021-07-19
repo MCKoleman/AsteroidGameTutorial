@@ -104,8 +104,10 @@ public class PlayerController : MonoBehaviour
             else
             {
                 // Regen energy
+                curEnergy += Time.deltaTime * energyRegenMod;
 
                 // Decrease cost of fire
+                curFireEnergyCost = Mathf.Clamp(curFireEnergyCost - Time.deltaTime * fireCostDecayMod, baseFireEnergyCost, maxEnergy);
             }
         }
         // If the timer hasn't finished, count it down
@@ -122,5 +124,32 @@ public class PlayerController : MonoBehaviour
     private void UpdateEnergyDisplay()
     {
 
+    }
+
+    // Kills the player, prompting respawn and resetting UI
+    private void KillPlayer()
+    {
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        rb.isKinematic = true;
+        rb.velocity = Vector2.zero;
+        GameManager.Instance.EndGame();
+    }
+
+    // Respawns the player
+    private void RespawnPlayer()
+    {
+        this.GetComponent<SpriteRenderer>().enabled = true;
+        rb.isKinematic = false;
+        rb.velocity = Vector2.zero;
+    }
+
+    // Event for when the player collides with any other object
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the player collides with an asteroid
+        if(collision.collider.CompareTag("Asteroid"))
+        {
+            KillPlayer();
+        }
     }
 }

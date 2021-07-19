@@ -70,6 +70,9 @@ public class SpawnManager : Singleton<SpawnManager>
 
         // Count how many asteroids have spawned this level
         asteroidsSpawnedThisLevel++;
+
+        // Give player a point for each spawned asteroid
+        ScoreManager.Instance.AddScore(1);
         CheckLevelProgression();
     }
 

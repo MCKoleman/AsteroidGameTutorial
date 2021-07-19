@@ -23,14 +23,15 @@ public class GameManager : Singleton<GameManager>
     }
 
     // Starts the game
-    private void StartGame()
+    public void StartGame()
     {
         IsGameActive = true;
     }
 
     // Ends the game
-    private void EndGame()
+    public void EndGame()
     {
+        ScoreManager.Instance.EndGame();
         IsGameActive = false;
     }
 }
